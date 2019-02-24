@@ -1,0 +1,89 @@
+body {
+    background-color: #eaeaea;
+}
+@font-face {
+    font-family: "Khand";
+    src: url("../font/webfont/Khand-Regular.woff2");
+    src: url("../font/webfont/Khand-Regular.woff") format("woff");
+}
+body{
+    margin: 0;
+}
+.mono {
+    display: flex;
+    height: 99vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    font-family: 'Khand', sans-serif;
+    color: #3a3a3a;
+    font-weight: bold;
+    margin: 0;
+}
+.subtitle {
+    font-family: 'Khand', sans-serif;
+    color: #3a3a3a;
+    font-weight: normal;
+    letter-spacing: 1em;
+    text-indent: 1em;
+    margin: 0;
+    margin-bottom: 40px;
+    opacity: .7;
+}
+.status {
+    font-family: 'Khand', sans-serif;
+    color: #3a3a3a;
+    font-weight: normal;
+    margin: 0;
+    opacity: .7;
+}
+.txtarea {
+    font-family: 'Khand', sans-serif;
+    font-size: 90%;
+    color: #3a3a3a;
+    font-weight: normal;
+    resize: none;
+    width: 800px;
+    background-color: #d1d1d1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s cubic-bezier(.75,0,.25,1);
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    white-space: pre;
+}
+.txtarea:focus {
+    background-color: #dddddd;
+}
+.panel {
+    display: flex;
+    width: 800px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.subpanel {
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+.panel-item {
+    font-family: 'Khand', sans-serif;
+    text-align: center;
+    width: 100px;
+    font-size: 100%;
+    color: #3a3a3a;
+    margin: 0;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #b7b7b7;
+    border-radius: 5px;
+}
+.panel-item:hover {
+    font-weight: bold;
+}
