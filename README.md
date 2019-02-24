@@ -4,4 +4,4 @@
 2. No painel de controle do programa, clique em "*Start*" na linha do módulo Apache.
 3. Baixe o repositório e mova a pasta "r-emportugues-master" para `C:\xampp\htdocs`.
 4. A partir de um navegador, acesse `//localhost/r-emportugues-master`.
-5. Clique em "Gerar Tabela" e aguarde o carregamento até a lista completa aparecer.
+5. Clique em "Criar Tabela" e aguarde o carregamento da lista.

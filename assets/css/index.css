@@ -1,13 +1,11 @@
 body {
     background-color: #eaeaea;
+    margin: 0;
 }
 @font-face {
     font-family: "Khand";
     src: url("../font/webfont/Khand-Regular.woff2");
     src: url("../font/webfont/Khand-Regular.woff") format("woff");
-}
-body{
-    margin: 0;
 }
 .mono {
     display: flex;
@@ -53,10 +51,8 @@ body{
     transition: background-color 0.3s cubic-bezier(.75,0,.25,1);
     border: none;
     outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
     white-space: pre;
+    box-shadow: 1px 1px 5px rgb(189, 189, 189);
 }
 .txtarea:focus {
     background-color: #dddddd;
