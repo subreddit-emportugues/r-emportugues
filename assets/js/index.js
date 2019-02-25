@@ -43,7 +43,7 @@ function visit(line) {
             type: 'POST',
             success: function(response) {
                 var json = jQuery.parseJSON(response);
-                setTextArea('| ' + json.subscribers + ' | ' + json.name + ' | ' + json.description + ' |' + "\n" + getTextArea());
+                setTextArea(json.subscribers + ' | ' + json.name + ' | ' + json.description + "\n" + getTextArea());
                 updateProgress();
             }
         });
