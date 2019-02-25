@@ -57,6 +57,20 @@ body {
 .txtarea:focus {
     background-color: #dddddd;
 }
+::-webkit-input-placeholder {
+    text-align: center;
+}
+:-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center;
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center;
+}
+:-ms-input-placeholder {
+    text-align: center;
+}
 .panel {
     display: flex;
     width: 800px;
