@@ -3,6 +3,7 @@ var paused = false;
 var progress = 0;
 var index = 0;
 var total = 0;
+var requests = [];
 
 var delay = 1000; // ms
 
@@ -29,7 +30,7 @@ function generate() {
 }
 
 function visit(line) {
-    setTimeout(function() {
+    requests.push(new Timer(function() {
         var dataPost = {
             "name": line.replace(/(\r\n|\n|\r)/gm, "")
         };
@@ -47,11 +48,40 @@ function visit(line) {
                 updateProgress();
             }
         });
-    }, delay * index);
+    }, delay * index));
+}
+
+function Timer(callback, delay) {
+    var timerId, start, remaining = delay;
+
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        remaining -= new Date() - start;
+    };
+
+    this.resume = function() {
+        start = new Date();
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(callback, remaining);
+    };
+
+    this.resume();
 }
 
 function pause() {
-    // TODO: pauses the foreach loop, which creates the table
+    paused = !paused;
+
+    if (paused) {
+        $('#pause-button').html('Continuar');
+        for (var i = progress; i < requests.length; i++) {
+            requests[i].pause();
+        }
+    } else {
+        $('#pause-button').html('Pausar');
+        for (var i = progress; i < requests.length; i++) {
+            requests[i].resume();
+        }
+    }
 }
 
 function updateProgress() {
@@ -73,6 +103,7 @@ function clearTextArea() {
         progress = 0;
         index = 0;
         total = 0;
+        requests = [];
         setState('Parado');
         setTextArea('');
         $('#progress-bar').css('width', 0);
