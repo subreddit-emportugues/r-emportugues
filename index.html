@@ -7,6 +7,7 @@
     <link href="assets/image/favicon.png" rel="icon">
     <link href="assets/css/index.css" rel="stylesheet">
     <link href="assets/css/progress-bar.css" rel="stylesheet">
+    <link href="assets/css/table.css" rel="stylesheet">
     <title>Crawler - r/EmPortugues</title>
 </head>
 <body>
@@ -14,20 +15,32 @@
         <div class="mono">
             <h1 class="title">r/EmPortugues</h1>
             <h4 class="subtitle">Crawler</h4>
-            <textarea id="textarea" class="txtarea" rows="15" cols="50" readonly placeholder="Clique em &quot;Criar Tabela&quot; para iniciar o processamento."></textarea>
+            <table id="table" class="table">
+                <thead>
+                  <tr>
+                    <th>Subreddit</th>
+                    <th>Subscrições</th>
+                    <th>Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
             <h4 id="status" class="status">...</h4>
             <div class="progress-bar-container">
                 <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
             <div class="panel">
                 <div class="subpanel">
-                    <p id="clear-button" class="panel-item" style="display: block;" onclick="clearTextArea()">Limpar</p>
+                    <p id="clear-button" class="panel-item" style="display: none;" onclick="reset()">Limpar</p>
                     <p id="generate-button" class="panel-item" style="display: block;" onclick="generate()">Criar Tabela</p>
+                    <p id="markdown-button" class="panel-item" style="display: none;" onclick="copyMarkdown()">Copiar Markdown</p>
                     <p id="pause-button" class="panel-item" style="display: none;" onclick="pause()">Pausar</p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="notification">Markdown copiado!</div>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
