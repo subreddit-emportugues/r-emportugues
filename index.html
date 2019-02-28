@@ -8,19 +8,23 @@
     <link href="assets/css/index.css" rel="stylesheet">
     <link href="assets/css/progress-bar.css" rel="stylesheet">
     <link href="assets/css/table.css" rel="stylesheet">
+    <link href="assets/css/notification.css" rel="stylesheet">
     <title>Crawler - r/EmPortugues</title>
 </head>
 <body>
     <div id="main">
         <div class="mono">
             <h1 class="title">r/EmPortugues</h1>
-            <h4 class="subtitle">Crawler</h4>
+            <h4 class="subtitle">crawler</h4>
             <table id="table" class="table">
                 <thead>
                   <tr>
-                    <th>Subreddit</th>
-                    <th>Subscrições</th>
-                    <th>Descrição</th>
+                    <th></th>
+                    <th><input id="subreddit-cb" class="checkbox" type="checkbox" checked> <p id="subreddit-sc" onclick="selectColumn(this);">Subreddit</p></th>
+                    <th><input id="subs-cb" class="checkbox" type="checkbox" checked> <p id="subs-sc"  onclick="selectColumn(this);">Subs ▾</p></th>
+                    <th><input id="created-cb" class="checkbox" type="checkbox"> <p id="created-sc"  onclick="selectColumn(this);">Criação</p></th>
+                    <th><input id="nsfw-cb" class="checkbox" type="checkbox"> <p id="nsfw-sc"  onclick="selectColumn(this);">NSFW</p></th>
+                    <th><input id="description-cb" class="checkbox" type="checkbox" checked> <p id="description-sc"  onclick="selectColumn(this);">Descrição</p></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,6 +50,10 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
     </script>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/timer.js"></script>
+    <script src="assets/js/dates.js"></script>
+    <script src="assets/js/scraper.js"></script>
+    <script src="assets/js/table.js"></script>
+    <script src="assets/js/output.js"></script>
 </body>
 </html>
