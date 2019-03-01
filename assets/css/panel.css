@@ -1,0 +1,27 @@
+.panel {
+    display: flex;
+    width: 800px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.subpanel {
+    display: flex;
+    width: 600px;
+    justify-content: space-around;
+    user-select: none;
+}
+.panel-item {
+    font-family: 'Khand', sans-serif;
+    text-align: center;
+    width: 120px;
+    font-size: 100%;
+    color: #3a3a3a;
+    margin: 0;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #b7b7b7;
+    border-radius: 5px;
+}
+.panel-item:hover {
+    font-weight: bold;
+}

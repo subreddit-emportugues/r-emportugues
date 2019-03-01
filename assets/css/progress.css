@@ -1,3 +1,11 @@
+.status {
+    font-family: 'Khand', sans-serif;
+    color: #3a3a3a;
+    font-weight: normal;
+    margin: 0;
+    opacity: .7;
+    user-select: none;
+}
 .progress-bar-container {
     width: 800px;
     margin: 6px auto 0;
@@ -9,6 +17,7 @@
 }
 .progress-bar {
     height: 6px;
+    width: 0;
     background-color: #0ed259;
     background-repeat: repeat-x;
     transition: width 0.6s ease;

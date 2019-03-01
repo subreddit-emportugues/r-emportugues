@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="assets/img/icon.png" rel="icon">
+    <link href="assets/css/index.css" rel="stylesheet">
+    <link href="assets/css/heading.css" rel="stylesheet">
+    <link href="assets/css/panel.css" rel="stylesheet">
+    <link href="assets/css/progress.css" rel="stylesheet">
+    <link href="assets/css/table.css" rel="stylesheet">
+    <link href="assets/css/notification.css" rel="stylesheet">
+    <title>Crawler - r/EmPortugues</title>
+</head>
+<body>
+    <div id="main">
+        <div class="main-column">
+            {% heading %}
+            {% table %}
+            {% progress %}
+            {% panel %}
+        </div>
+    </div>
+    {% notification %}
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script>
+    <script src="assets/js/Output.js"></script>
+    <script src="assets/js/Table.js"></script>
+    <script src="assets/js/Panel.js"></script>
+    <script src="assets/js/ProgressBar.js"></script>
+    <script src="assets/js/Scraper.js"></script>
+    <script src="assets/js/Input.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -58,3 +58,7 @@
 .table tbody tr:nth-child(even) {
     background-color: #dddddd;
 }
+.checkbox {
+    position: relative;
+    top: 2px;
+}

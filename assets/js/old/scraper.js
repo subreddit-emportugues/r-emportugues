@@ -19,7 +19,7 @@ function generate() {
 
        setState('Iniciando...');
 
-        $.get('resources/subreddits_mini.txt', function (response) {
+        $.get('res/subreddits_mini.txt', function (response) {
             var lines = response.split("\n");
             total = lines.length;
 
@@ -39,7 +39,7 @@ function visit(line) {
         var dataString = JSON.stringify(dataPost);
         
         $.ajax({
-            url: 'visitor.php',
+            url: 'app/helpers/visitor.php',
             data: {
                 subreddit: dataString
             },

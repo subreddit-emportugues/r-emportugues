@@ -20,12 +20,13 @@ function copyMarkdown() {
         txt += '\n';
     });
     navigator.clipboard.writeText(txt);
-    $('.notification').slideDown('fast');
+    $('#notification-bar').html('Markdown copiado!');
+    $('#notification-bar').slideDown('fast');
     window.setTimeout(closeNotification, 3000);
 }
 
 function closeNotification() {
-    $('.notification').slideUp('fast');
+    $('#notification-bar').slideUp('fast');
 }
 
 function sortBy(a,b) {
