@@ -79,11 +79,21 @@ class Output {
     }
 
     removeColumnArrow(column) {
-        this.setHtml(column, Input.getHtml(column).replace(' ▾', ''));
+        this.setHtml(column, Input.getHtml(column).replace(/▾|▴/g, ''));
     }
 
     addColumnArrow(column) {
         this.setHtml(column, Input.getHtml(column) + ' ▾');
+    }
+
+    reverseColumnArrow(column, ascending) {
+        this.removeColumnArrow(column);
+
+        if (ascending) {
+            this.setHtml(column, Input.getHtml(column) + ' ▴');
+        } else {
+            this.setHtml(column, Input.getHtml(column) + ' ▾');
+        }
     }
 
     setCss(element, attribute, value) {

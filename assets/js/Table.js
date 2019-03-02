@@ -25,8 +25,13 @@ class Table {
     }
 
     selectColumn(column) {
-        this.sortingColumn = column;
-        this.output.addColumnArrow(column.element);
+        if (column != this.sortingColumn) {
+            this.sortingColumn = column;
+            this.output.addColumnArrow(column.element);
+        } else {
+            this.sortingColumn.toggleOrder();
+            this.output.reverseColumnArrow(column.element, column.isAscending());
+        }
     }
 
     removeColumnArrows(columns) {

@@ -7,7 +7,22 @@ class Formatter {
     }
 
     generateMarkdownTable() {
-        let markdownTable = '';
+        var headingItems = [
+            { element: 'subreddit', text: 'Name' },
+            { element: 'subs', text: 'Subscribers' },
+            { element: 'created', text: 'Created' },
+            { element: 'nsfw', text: 'NSFW' },
+            { element: 'description', text: 'Description' }
+          ];
+        let heading = [];
+        
+        headingItems.forEach(function(item) {
+            if (Input.isColumnChecked(item.element)) {
+                heading.push(item.text);
+            }
+        });
+
+        let markdownTable = heading.join('|') + '\n' + ':--|'.repeat(heading.length) + '\n';
 
         this.sortSubreddits();
 
@@ -15,9 +30,11 @@ class Formatter {
             let line = [];
             if (Input.isColumnChecked('subreddit')) {
                 line.push(subreddit.getName('markdown'));
+                heading[0] = 'name';
             }
             if (Input.isColumnChecked('subs')) {
                 line.push(subreddit.getSubscribers('markdown'));
+                heading[0] = 'name';
             }
             if (Input.isColumnChecked('created')) {
                 line.push(subreddit.getCreated('markdown'));
@@ -41,10 +58,15 @@ class Formatter {
 
         this.scraper.subreddits.sort(function(r1, r2) {
             let index = context.table.sortingColumn.index;
+            let ascending = context.table.sortingColumn.isAscending();
+
+            if (ascending) {
+                [r1, r2] = [r2, r1];
+            }
     
             switch(index) {
                 case 0:
-                    return r1.name.localeCompare(r2.name);
+                    return r2.name.localeCompare(r1.name);
                     break;
                 case 1:
                     return r2.subscribers - r1.subscribers;
@@ -56,7 +78,7 @@ class Formatter {
                     return r1.nsfw ? -1 : 1;
                     break;
                 case 4:
-                    return r1.description.localeCompare(r2.description);
+                    return r2.description.localeCompare(r1.description);
                     break;
             }
         });
