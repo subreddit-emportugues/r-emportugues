@@ -7,22 +7,22 @@ class Formatter {
     }
 
     generateMarkdownTable() {
-        var headingItems = [
-            { element: 'subreddit', text: 'Name' },
-            { element: 'subs', text: 'Subscribers' },
-            { element: 'created', text: 'Created' },
+        var headerItems = [
+            { element: 'subreddit', text: 'Subreddit' },
+            { element: 'subs', text: 'Subscrições' },
+            { element: 'created', text: 'Criação' },
             { element: 'nsfw', text: 'NSFW' },
-            { element: 'description', text: 'Description' }
+            { element: 'description', text: 'Descrição' }
           ];
-        let heading = [];
+        let header = [];
         
-        headingItems.forEach(function(item) {
+        headerItems.forEach(function(item) {
             if (Input.isColumnChecked(item.element)) {
-                heading.push(item.text);
+                header.push(item.text);
             }
         });
 
-        let markdownTable = heading.join('|') + '\n' + ':--|'.repeat(heading.length) + '\n';
+        let markdownTable = header.join('|') + '\n' + ':--|'.repeat(header.length) + '\n';
 
         this.sortSubreddits();
 
@@ -30,11 +30,9 @@ class Formatter {
             let line = [];
             if (Input.isColumnChecked('subreddit')) {
                 line.push(subreddit.getName('markdown'));
-                heading[0] = 'name';
             }
             if (Input.isColumnChecked('subs')) {
                 line.push(subreddit.getSubscribers('markdown'));
-                heading[0] = 'name';
             }
             if (Input.isColumnChecked('created')) {
                 line.push(subreddit.getCreated('markdown'));
