@@ -7,7 +7,7 @@ class Formatter {
     }
 
     generateMarkdownTable() {
-        let markdownTable = '';
+        let markdownTable = 'name|subscribers|created|nsfw|description' + '\n' + ':--|:--|:--|:--|:--' + '\n';
 
         this.sortSubreddits();
 
