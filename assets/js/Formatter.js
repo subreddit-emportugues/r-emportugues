@@ -7,7 +7,6 @@ class Formatter {
     }
 
     generateMarkdownTable() {
-<<<<<<< HEAD
         var headingItems = [
             { element: 'subreddit', text: 'Name' },
             { element: 'subs', text: 'Subscribers' },
@@ -24,9 +23,6 @@ class Formatter {
         });
 
         let markdownTable = heading.join('|') + '\n' + ':--|'.repeat(heading.length) + '\n';
-=======
-        let markdownTable = 'name|subscribers|created|nsfw|description' + '\n' + ':--|:--|:--|:--|:--' + '\n';
->>>>>>> 4e3abf366f3b4768b9eb7bf8736ba358e3323263
 
         this.sortSubreddits();
 
