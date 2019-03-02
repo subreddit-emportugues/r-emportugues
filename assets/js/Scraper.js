@@ -6,9 +6,16 @@ class Scraper {
         this.panel = panel;
         
         this.running = false;
+        this.paused = false;
         this.index = 0;
         this.total = 0;
+        this.delay = 1000; // ms
         this.requests = [];
+        this.subreddits = [];
+    }
+
+    awake() {
+        this.progressBar.awake();
     }
 
     start() {
@@ -24,29 +31,70 @@ class Scraper {
     }
 
     readSubredditList() {
-        let context = this;
+        const context = this;
         
         $.get(Input.getSubredditListFilename(), function (response) {
-            let lines = response.split("\n");
-            context.total = lines.length;
+            const subredditNames = response.split("\n");
+            context.total = subredditNames.length;
 
-            lines.forEach(function(line) {
-                alert(line);
+            subredditNames.forEach(function(subredditName) {
                 context.index++;
-                //TODO: implement visit(line);
+                context.makeRequest(subredditName);
             });
         });
+    }
+
+    makeRequest(subredditName) {
+        this.requests.push(new Request(subredditName, this.delay * this.index, this));
+    }
+
+    addSubreddit(subreddit) {
+        this.subreddits.push(subreddit);
+    }
+
+    updateViews(subreddit) {
+        this.table.addSubreddit(subreddit);
+        this.table.scroll(this.progressBar.progress);
+        this.progressBar.increase(this.total);
+
+        if (this.progressBar.progress == this.total) {
+            this.finish();
+        }
+    }
+
+    pause() {
+        if (this.running) {
+            this.paused = !this.paused;
+    
+            for (let i = this.progressBar.progress; i < this.requests.length; i++) {
+                if (this.paused) {
+                    this.requests[i].pause();
+                    
+                } else {
+                    this.requests[i].resume();
+                }
+                this.panel.pause(this.paused);
+            }
+        }
     }
 
     reset() {
         if (!this.running) {
             this.index = 0;
             this.total = 0;
+            this.paused = false;
             this.requests = [];
+            this.subreddits = [];
 
             this.progressBar.reset();
             this.table.reset();
             this.panel.reset();
         }
+    }
+
+    finish() {
+        this.running = false;
+        this.progressBar.finish();
+        this.panel.finish();
     }
 }
