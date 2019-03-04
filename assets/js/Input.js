@@ -1,3 +1,4 @@
+//Cria os event listeners.
 class Input {
 
     constructor(scraper, table, formatter) {
@@ -32,8 +33,11 @@ class Input {
 
         this.columns.forEach(function(column) {
             $(column.element).click(function () {
-                context.table.removeColumnArrows(context.columns);
-                context.table.selectColumn(column);
+                if (!context.scraper.running && context.scraper.started) {
+                    context.table.removeColumnArrows(context.columns);
+                    context.table.selectColumn(column);
+                    context.table.updateTable(context.scraper);
+                }
             });
         });
     }

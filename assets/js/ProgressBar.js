@@ -1,3 +1,4 @@
+//Usa o Output.js para exibir os dados para o usuário.
 class ProgressBar {
 
     constructor(output) {
@@ -25,6 +26,7 @@ class ProgressBar {
         this.progress = 0;
     }
 
+    //Se o progresso estiver em 100%, muda o estado para "Finalizado".
     finish() {
         this.output.setState('Finalizado');
     }

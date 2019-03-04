@@ -1,3 +1,4 @@
+//Faz os pedidos de acesso ao PHP pela Scraper.js.
 class Request {
     constructor(subredditName, delay, scraper) {
         this.timerId;
@@ -10,6 +11,7 @@ class Request {
         this.resume();
     }
 
+    //Pede para o visitor.php pegar o JSON e salva os dados do subreddit na classe Subreddit.js.
     getCallback() {
         const context = this;
 

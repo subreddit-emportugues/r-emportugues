@@ -1,3 +1,8 @@
+/*
+Obtém os dados do Reddit e modifica o estado das views (Panel.js, ProgressBar.js e Table.js).
+Dados são usados por Formatter.js e ordenados por Table.js.
+Serve para Request.js fazer os pedidos de acesso ao PHP.
+*/
 class Scraper {
 
     constructor(progressBar, table, panel) {
@@ -5,6 +10,7 @@ class Scraper {
         this.table = table;
         this.panel = panel;
         
+        this.started = false;
         this.running = false;
         this.paused = false;
         this.index = 0;
@@ -18,10 +24,12 @@ class Scraper {
         this.progressBar.awake();
     }
 
+    //Reinicia o estados das classes.
     start() {
         if (!this.running) {
             this.reset();
             this.running = true;
+            this.started = true;
 
             this.panel.start();
             this.progressBar.start();
@@ -30,6 +38,7 @@ class Scraper {
         }
     }
 
+    //Lê a lista de subreddits e cria um request para cada um deles.
     readSubredditList() {
         const context = this;
         
@@ -48,10 +57,12 @@ class Scraper {
         this.requests.push(new Request(subredditName, this.delay * this.index, this));
     }
 
+    //Adiciona o subreddit na lista.
     addSubreddit(subreddit) {
         this.subreddits.push(subreddit);
     }
 
+    //Adiciona os dados do subreddit na tabela e aumenta o progresso.
     updateViews(subreddit) {
         this.table.addSubreddit(subreddit);
         this.table.scroll(this.progressBar.progress);
@@ -96,5 +107,7 @@ class Scraper {
         this.running = false;
         this.progressBar.finish();
         this.panel.finish();
+        this.table.updateTable(this);
+        this.table.start();
     }
 }

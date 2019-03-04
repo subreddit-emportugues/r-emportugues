@@ -1,3 +1,4 @@
+//Usa o Output.js para exibir os dados para o usuário.
 class Panel {
 
     constructor(output) {

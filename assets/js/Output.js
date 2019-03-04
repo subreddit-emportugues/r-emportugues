@@ -1,3 +1,7 @@
+/*
+Usado pelas views (Panel.js, ProgessBar.js e Table.js) para exibir os dados para o usuário.
+Serve para exibir os dados de Formatter.js.
+*/
 class Output {
 
     setState(state) {
@@ -29,17 +33,31 @@ class Output {
         return time;
     }
 
-    insertRowIntoTable(icon, name, subscribers, created, nsfw, description) {
-        $('#table tbody').prepend(`
-            <tr>
-            <td><img src="${icon}" width="20" height="20"></td>
-            <td>${name}</td>
-            <td>${subscribers}</td>
-            <td>${created}</td>
-            <td>${nsfw}</td>
-            <td>${description}</td>
-            </tr>
-        `);
+    enableTableControls() {
+        this.setHtml('#subs-sc .arrow', '▾');
+        this.setCss('#table th p', 'cursor', 'pointer');
+        this.setCss('.checkbox', 'display', 'inline');
+    }
+
+    prependRowtoTable(subreddit) {
+        $('#table tbody').prepend(this.getPreviewTableRowFormat(subreddit));
+    }
+
+    appendRowtoTable(subreddit) {
+        $('#table tbody').append(this.getPreviewTableRowFormat(subreddit));
+    }
+
+    getPreviewTableRowFormat(subreddit) {
+        return `
+        <tr>
+        <td><img src="${subreddit.getIcon("preview")}" width="20" height="20"></td>
+        <td>${subreddit.getName("preview")}</td>
+        <td>${subreddit.getSubscribers("preview")}</td>
+        <td>${subreddit.getCreated("preview")}</td>
+        <td>${subreddit.getNsfw("preview")}</td>
+        <td>${subreddit.getDescription("preview")}</td>
+        </tr>
+        `;  
     }
 
     scrollTable(progress) {
@@ -78,6 +96,7 @@ class Output {
         }
     }
 
+    //Inverte a seta ▾/▴ na tabela de preview.
     removeColumnArrow(column) {
         this.setHtml(column, Input.getHtml(column).replace(/▾|▴/g, ''));
     }

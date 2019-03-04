@@ -1,3 +1,7 @@
+/*
+Forma-se pelo conjunto de dados de um subreddit.
+Dados são salvos depois de Request.getCallback() pedir para o visitor.php pegar o JSON.
+*/
 class Subreddit {
 
     constructor(name, subscribers, created, nsfw, description, icon) {
