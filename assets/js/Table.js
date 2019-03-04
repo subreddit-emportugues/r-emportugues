@@ -2,7 +2,6 @@
 Usa o Output.js para exibir os dados para o usuário.
 Coluna selecionada serve para ordenar os dados da Scrapper.js usados em Formatter.js.
 */
-Dados são usados por Formatter.js.
 class Table {
 
     constructor(output) {
@@ -53,8 +52,8 @@ class Table {
     Verifica se a coluna selecionada é crescente ou decrescente.
     Troca a ordem da comparação que forma a função de ordenação.
     Chamada por Formatter.generateMarkdownTable().
-    */    
-    sortSubreddits() {
+    */       
+    sortSubreddits(scraper) {
         const context = this;
 
         scraper.subreddits.sort(function(r1, r2) {
