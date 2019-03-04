@@ -5,6 +5,7 @@ class Scraper {
         this.table = table;
         this.panel = panel;
         
+        this.started = false;
         this.running = false;
         this.paused = false;
         this.index = 0;
@@ -22,6 +23,7 @@ class Scraper {
         if (!this.running) {
             this.reset();
             this.running = true;
+            this.started = true;
 
             this.panel.start();
             this.progressBar.start();
@@ -96,5 +98,7 @@ class Scraper {
         this.running = false;
         this.progressBar.finish();
         this.panel.finish();
+        this.table.updateTable(this);
+        this.table.start();
     }
 }
