@@ -1,44 +1,70 @@
-/*
-Usa o Output.js para exibir os dados para o usuário.
-Coluna selecionada serve para ordenar os dados da Scrapper.js usados em Formatter.js.
-*/
+/**
+ * Controla a tabela.
+ */
 class Table {
 
+    /**
+     * Cria o controlador da tabela.
+     * @param {Output} output - O objeto que exibe as alteraÃ§Ãµes da tabela.
+     */
     constructor(output) {
         this.output = output;
+        /** @type {Column} */
         this.sortingColumn;
     }
 
+    /**
+     * Acorda a tabela.
+     * @param {Column} column - A coluna selecionada.
+     */
     awake(column) {
         this.sortingColumn = column;
     }
 
+    /**
+     * Ativa os controles da tabela.
+     */
     start() {
         this.output.enableTableControls();
     }
 
-    addSubreddit(subreddit, append) {
+    /**
+     * Adiciona um subreddit Ã  tabela.
+     * @param {Subreddit} subreddit - O subreddit adicionado Ã  tabela.
+     */
+    addSubreddit(subreddit) {
         this.output.prependRowtoTable(subreddit);
     }
 
+    /**
+     * Cria o efeito de rolagem da tabela.
+     * @param {ProgressBar} progress - O Progresso do scraper.
+     */
     scroll(progress) {
         this.output.scrollTable(progress);
     }
 
-    /*
-    Chamada quando o usuário clica no nome da coluna.
-    Caso a coluna recebida por parâmetro seja igual à coluna já selecionada,
-    as funções sortingColumn.toggleOrder() e output.reverseColumnArrow() são chamadas.
-    */
+    /**
+     * Seleciona uma coluna.
+     * Se a coluna jÃ¡ estiver selecionada, inverte a ordenaÃ§Ã£o.
+     * @param {Column} column - A coluna selecionada.
+     */
     selectColumn(column) {
+        if (this.sortingColumn == column) {
+            this.sortingColumn.toggleOrder();
+        }
         this.sortingColumn = column;
         this.output.addColumnArrow(column.element);
-        this.sortingColumn.toggleOrder();
+        
         if (column.isAscending()) {
             this.output.reverseColumnArrow(column.element, column.isAscending());
         }
     }
 
+    /**
+     * Reordena as linhas da tabela.
+     * @param {Scraper} scraper - O scraper usado para obter a lista de subreddits.
+     */
     updateTable(scraper) {
         const context = this;
         this.reset();
@@ -48,11 +74,10 @@ class Table {
         });
     }
 
-    /*
-    Verifica se a coluna selecionada é crescente ou decrescente.
-    Troca a ordem da comparação que forma a função de ordenação.
-    Chamada por Formatter.generateMarkdownTable().
-    */       
+    /**
+     * Ordena a lista de subreddits do scraper de acordo com o controlador da tabela.
+     * @param {Scraper} scraper - O scraper usado para obter a lista de subreddits.
+     */
     sortSubreddits(scraper) {
         const context = this;
 
@@ -84,6 +109,10 @@ class Table {
         });
     }
 
+    /**
+     * Remove os indicadores de ordenaÃ§Ã£o de todas as colunas da tabela.
+     * @param {Column} columns - As colunas da tabela.
+     */
     removeColumnArrows(columns) {
         const context = this;
         columns.forEach(function(column) {
@@ -91,6 +120,9 @@ class Table {
         });
     }
 
+    /**
+     * Zera a tabela.
+     */
     reset() {
         this.output.resetTable();
     }

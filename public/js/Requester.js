@@ -1,5 +1,14 @@
-//Faz os pedidos de acesso ao PHP pela Scraper.js.
-class Request {
+/**
+ * Delega um pedido ao backend.
+ */
+class Requester {
+
+    /**
+     * Cria um requester.
+     * @param {String} subredditName - O nome do subreddit que será enviado para o backend.
+     * @param {Number} delay - A quantidade de tempo, em ms, que levará até que o backend receba o nome do subreddit.
+     * @param {Scraper} scraper - O scraper que receberá os dados do backend.
+     */
     constructor(subredditName, delay, scraper) {
         this.timerId;
         this.start;
@@ -11,7 +20,10 @@ class Request {
         this.resume();
     }
 
-    //Pede para o visitor.php pegar o JSON e salva os dados do subreddit na classe Subreddit.js.
+    /**
+     * Transfere o nome de um subreddit para o backend e recupera os dados do subreddit.
+     * @return {Function} Uma callback function.
+     */
     getCallback() {
         const context = this;
 
@@ -46,11 +58,17 @@ class Request {
         };
     }
 
+    /**
+     * Interrompe o contador do delay do pedido.
+     */
     pause() {
         window.clearTimeout(this.timerId);
         this.remaining -= new Date() - this.start;
     }
 
+    /**
+     * Continua o contador do delay do pedido.
+     */
     resume() {
         this.start = new Date();
         window.clearTimeout(this.timerId);

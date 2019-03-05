@@ -1,13 +1,25 @@
+/**
+ * Gera a tabela formatada.
+ */
 class Formatter {
 
+    /**
+     * Cria o objeto formatador.
+     * @param {Table} table - A tabela cujos dados serão formatados.
+     * @param {Scraper} scraper - O scraper que contém a lista de subreddits.
+     * @param {Output} output - O objeto que exibe notificações.
+     */
     constructor(table, scraper, output) {
         this.table = table;
         this.scraper = scraper;
         this.output = output;
     }
 
+    /**
+     * Cria uma versão em markdown da tabela.
+     */
     generateMarkdownTable() {
-        var headerItems = [
+        let headerItems = [
             { element: 'subreddit', text: 'Subreddit' },
             { element: 'subs', text: 'Subscrições' },
             { element: 'created', text: 'Criação' },

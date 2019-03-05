@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Subreddit.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Subreddit.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Representa o conjunto de dados de um subreddit.
+ */
+class Subreddit {
+
+    /**
+     * Cria um objeto que representa um subreddit.
+     * @param {String} name - O nome do subreddit.
+     * @param {Number} subscribers - A quantidade de inscritos no subreddit.
+     * @param {Number} created - A data de criação do subreddit no formato UNIX.
+     * @param {Boolean} nsfw - Valor que indica se o subreddit não é recomendado para pessoas com menos de 18 anos.
+     * @param {String} description - Descrição do subreddit.
+     * @param {String} icon - URL do ícone do subreddit.
+     */
+    constructor(name, subscribers, created, nsfw, description, icon) {
+        this.name = name;
+        this.subscribers = subscribers;
+        this.created = created;
+        this.nsfw = nsfw;
+        this.description = description;
+        this.icon = icon;
+    }
+
+    /**
+     * Retorna o nome do subreddit com a formatação especificada.
+     * @param {String} format - A formatação do nome.
+     * @return {String} O nome do subreddit.
+     */
+    getName(format) {
+        switch (format) {
+            case 'preview':
+            case 'markdown':
+                return this.name;
+                break;
+        }
+    }
+
+    /**
+     * Retorna a quantidade de inscritos no subreddit com a formatação especificada.
+     * @param {String} format - A formatação da quantidade de inscritos.
+     * @return {Number} A quantidade de inscritos.
+     */
+    getSubscribers(format) {
+        switch (format) {
+            case 'preview':
+            case 'markdown':
+                return this.subscribers;
+                break;
+        }
+    }
+
+    /**
+     * Retorna a data na qual o subreddit foi criado com a formatação especificada.
+     * @param {String} format - A formatação da data de criação.
+     * @return {String} A data de criação.
+     */
+    getCreated(format) {
+        switch (format) {
+            case 'preview':
+            case 'markdown':
+                return Output.convertUnixTimestamp(this.created);
+                break;
+        }
+    }
+
+    /**
+     * Retorna a data na qual o subreddit foi criado com a formatação especificada.
+     * @param {String} format - A formatação da data de criação.
+     * @return {String} A representação em português do valor da variável NSFW.
+     */
+    getNsfw(format) {
+        switch (format) {
+            case 'preview':
+            case 'markdown':
+                return this.nsfw ? 'Sim' : 'Não';
+                break;
+        }
+    }
+
+    /**
+     * Retorna a descrição do subreddit com a formatação especificada.
+     * @param {String} format - A formatação da descrição.
+     * @return {String} A descrição do subreddit.
+     */
+    getDescription(format) {
+        switch (format) {
+            case 'preview':
+                if (this.description.length > 200) {
+                    return this.description.substring(0, 200) + '...';
+                } else if (this.description == '') {
+                    return '- - -';
+                } else {
+                    return this.description;
+                }
+                break;
+            case 'markdown':
+                return this.description;
+                break;
+        }
+    }
+
+    /**
+     * Retorna o ícone do subreddit com a formatação especificada.
+     * @param {String} format - A formatação do ícone.
+     * @return {String} O ícone do subreddit.
+     */
+    getIcon(format) {
+        switch (format) {
+            case 'preview':
+            case 'markdown':
+                return this.icon == '' ? 'https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png' : this.icon
+                break;
+        }
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Column.html">Column</a></li><li><a href="Formatter.html">Formatter</a></li><li><a href="Input.html">Input</a></li><li><a href="Output.html">Output</a></li><li><a href="Panel.html">Panel</a></li><li><a href="ProgressBar.html">ProgressBar</a></li><li><a href="Requester.html">Requester</a></li><li><a href="Scraper.html">Scraper</a></li><li><a href="Subreddit.html">Subreddit</a></li><li><a href="Table.html">Table</a></li></ul><h3>Global</h3><ul><li><a href="global.html#main">main</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Mar 05 2019 02:04:08 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

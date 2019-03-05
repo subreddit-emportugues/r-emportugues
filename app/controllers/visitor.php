@@ -1,5 +1,5 @@
 <?php
-//Os pedidos de acesso são feitos por Request.js pela Scraper.js.
+// Os pedidos de acesso sÃ£o feitos por Requester.js.
 
 $subreddit = json_decode($_POST["subreddit"]);
 

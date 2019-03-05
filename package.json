@@ -1,0 +1,22 @@
+{
+  "name": "ept-crawler",
+  "version": "0.1.0",
+  "description": "r/EmPortugues Crawler",
+  "main": "public/js/app.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subreddit-emportugues/r-emportugues.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/subreddit-emportugues/r-emportugues/issues"
+  },
+  "homepage": "https://github.com/subreddit-emportugues/r-emportugues#readme",
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
+  }
+}

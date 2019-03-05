@@ -1,3 +1,14 @@
+/**
+ * Esta função é o ponto de começo da aplicação. 
+ * Ela instancia todos os objetos que interagem durante sua execução.
+ * @see Formatter
+ * @see Input
+ * @see Output
+ * @see Panel
+ * @see ProgressBar
+ * @see Scraper
+ * @see Table
+ */
 function main() {
     const output = new Output();
 

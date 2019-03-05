@@ -1,10 +1,14 @@
-/*
-Obt�m os dados do Reddit e modifica o estado das views (Panel.js, ProgressBar.js e Table.js).
-Dados s�o usados por Formatter.js e ordenados por Table.js.
-Serve para Request.js fazer os pedidos de acesso ao PHP.
-*/
+/**
+ * Controla o scraper.
+ */
 class Scraper {
 
+    /**
+     * Cria um scraper.
+     * @param {ProgressBar} progressBar - A barra de progresso que informa o progresso do scraper.
+     * @param {Table} table - A tabela que é preenchida com os dados obtidos pelo scraper.
+     * @param {Panel} panel - O painel que controla o scraper.
+     */
     constructor(progressBar, table, panel) {
         this.progressBar = progressBar;
         this.table = table;
@@ -16,15 +20,23 @@ class Scraper {
         this.index = 0;
         this.total = 0;
         this.delay = 1000; // ms
-        this.requests = [];
+
+        /** @type {Requester[]} */
+        this.requesters = [];
+        /** @type {Subreddit[]} */
         this.subreddits = [];
     }
 
+    /**
+     * Acorda a barra de progresso.
+     */
     awake() {
         this.progressBar.awake();
     }
 
-    //Reinicia o estados das classes.
+    /**
+     * Se o scraper não estiver rodando, reinicia o scraper, o painel e a barra de progresso.
+     */
     start() {
         if (!this.running) {
             this.reset();
@@ -38,7 +50,9 @@ class Scraper {
         }
     }
 
-    //L� a lista de subreddits e cria um request para cada um deles.
+    /**
+     * Lê a lista de subreddits e itera por cada um deles.
+     */
     readSubredditList() {
         const context = this;
         
@@ -48,21 +62,31 @@ class Scraper {
 
             subredditNames.forEach(function(subredditName) {
                 context.index++;
-                context.makeRequest(subredditName);
+                context.makeRequester(subredditName);
             });
         });
     }
 
-    makeRequest(subredditName) {
-        this.requests.push(new Request(subredditName, this.delay * this.index, this));
+    /**
+     * Cria um requester para o subreddit especificado.
+     * @param {Subreddit} subredditName - O nome do reddit.
+     */
+    makeRequester(subredditName) {
+        this.requesters.push(new Requester(subredditName, this.delay * this.index, this));
     }
 
-    //Adiciona o subreddit na lista.
+    /**
+     * Adiciona o subreddit especificado à lista.
+     * @param {Subreddit} subreddit - O subreddit que é adicionado à lista.
+     */
     addSubreddit(subreddit) {
         this.subreddits.push(subreddit);
     }
 
-    //Adiciona os dados do subreddit na tabela e aumenta o progresso.
+    /**
+     * Adiciona o subreddit especificado à tabela e aumenta o progresso da barra de progresso.
+     * @param {Subreddit} subreddit - O subreddit que é adicionado à tabela.
+     */
     updateViews(subreddit) {
         this.table.addSubreddit(subreddit);
         this.table.scroll(this.progressBar.progress);
@@ -73,28 +97,34 @@ class Scraper {
         }
     }
 
+    /**
+     * Se o scraper estiver rodando, interrompe sua execução.
+     */
     pause() {
         if (this.running) {
             this.paused = !this.paused;
     
-            for (let i = this.progressBar.progress; i < this.requests.length; i++) {
+            for (let i = this.progressBar.progress; i < this.requesters.length; i++) {
                 if (this.paused) {
-                    this.requests[i].pause();
+                    this.requesters[i].pause();
                     
                 } else {
-                    this.requests[i].resume();
+                    this.requesters[i].resume();
                 }
                 this.panel.pause(this.paused);
             }
         }
     }
 
+    /**
+     * Zera todas as variáveis do scraper.
+     */
     reset() {
         if (!this.running) {
             this.index = 0;
             this.total = 0;
             this.paused = false;
-            this.requests = [];
+            this.requesters = [];
             this.subreddits = [];
 
             this.progressBar.reset();
@@ -103,6 +133,9 @@ class Scraper {
         }
     }
 
+    /**
+     * Finaliza o scraper.
+     */
     finish() {
         this.running = false;
         this.progressBar.finish();
